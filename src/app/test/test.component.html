@@ -1,0 +1,102 @@
+<div class="app-main" id="main">
+  <!-- begin container-fluid -->
+  <div class="container-fluid">
+    <!-- begin row -->
+    <div class="row">
+      <div class="col-md-12 m-b-30">
+        <!-- begin page title -->
+        <div class="d-block d-sm-flex flex-nowrap align-items-center">
+          <div class="page-title mb-2 mb-sm-0">
+            <h1>test List</h1>
+          </div>
+          <div class="ml-auto d-flex align-items-center">
+            <nav>
+              <ol class="breadcrumb p-0 m-b-0">
+                <li class="breadcrumb-item">
+                  <a routerLink="/home"><i class="ti ti-home"></i></a>
+                </li>
+                <li class="breadcrumb-item">
+                  Pages
+                </li>
+                <li class="breadcrumb-item active text-primary" aria-current="page">Task
+                  List</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <!-- end page title -->
+      </div>
+    </div>
+    <!-- end row -->
+    <!-- start task list contant -->
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card card-statistics task-list-contant">
+          <div class="card-body table-responsive p-0">
+            <table class="table task-table mb-0">
+              <thead class="border-bottom">
+              <tr>
+
+                <td>
+                  <span class="font-weight-bold">titre</span>
+                </td>
+                <td>
+                  <span class="font-weight-bold">niveaux</span>
+                </td>
+                <td>
+                  <span class="font-weight-bold">question</span>
+                </td>
+                <td >
+
+                  <span class="font-weight-bold">ACTION</span>
+                </td>
+
+              </tr>
+              </thead>
+              <tbody class="text-muted mb-0">
+              <tr *ngFor="let e of listtest">
+
+                <td class="w-30">
+                 {{e.titre}}
+                </td>
+                <td><span>{{e.niveau}}</span>
+                {{e._id}}</td>
+                <td class="task-table-td">
+                  <div class="chat">
+                    <i class="fa fa-question"></i><span class="badge badge-success">{{e.question.length}}</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="dropdown">
+                    <a class="btn font-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fa fa-gear"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right custom-dropdown p-4">
+                      <a href ="/home/detailtest/{{e._id}}"><i
+                        class="ti ti-pencil pr-2 text-primary"></i>
+                        voir detail</a>
+                      <a class="dropdown-item" href="javascript:void(0)"><i
+                        class="ti ti-announcement pr-2 text-info"></i>
+                        Mark as Unread</a>
+                      <a class="dropdown-item" href="javascript:void(0)"><i
+                        class="ti ti-close pr-2 text-warning"></i>
+                        Close</a>
+                      <a class="dropdown-item" href="javascript:void(0)"><i
+                        class="ti ti-trash pr-2 text-danger"></i>
+                        Delete</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end task list contant -->
+  </div>
+  <!-- end container-fluid -->
+</div>

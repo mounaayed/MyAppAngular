@@ -1,0 +1,148 @@
+<div class="app-main" id="main">
+  <!-- begin container-fluid -->
+  <div class="container-fluid">
+    <!-- begin row -->
+    <div class="row">
+      <div class="col-md-12 m-b-30">
+        <!-- begin page title -->
+        <div class="d-block d-sm-flex flex-nowrap align-items-center">
+          <div class="page-title mb-2 mb-sm-0">
+            <h1>FAQ</h1>
+          </div>
+          <div class="ml-auto d-flex align-items-center">
+            <nav>
+              <ol class="breadcrumb p-0 m-b-0">
+                <li class="breadcrumb-item">
+                  <a href="index.html"><i class="ti ti-home"></i></a>
+                </li>
+                <li class="breadcrumb-item">
+                  Pages
+                </li>
+                <li class="breadcrumb-item active text-primary" aria-current="page">FAQ</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <!-- end page title -->
+      </div>
+    </div>
+    <!-- end row -->
+    <!--faq-contant-start-->
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card card-statistics faq-contant p-0 p-sm-4">
+
+          titre:{{test?.titre}}
+          <div class="tab nav-center">
+            <button class="btn btn-danger" (click)="openModal(ajoutquestion)">ajouter quetion</button>
+            <div class="card-body">
+              <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show pt-20 active" id="research"
+                     role="tabpanel">
+                  <div class="accordion" id="accordionsimplefill">
+
+                    <div class="acd-group border-bottom-0"
+                         *ngFor="let e of listquestion;let index=index">
+                      <div class="card-header rounded-0 bg-primary">
+                        <h5 class="mb-0">
+                          <a (click)="e.iscollapsed = !e.iscollapsed;
+                                                    recuper(e.proposition);
+                                                    "
+                             [attr.aria-expanded]="!e.iscollapsed"
+                             aria-controls="collapseExample"
+                             class="btn-block text-white text-left acd-heading collapsed"
+                             data-toggle="collapse">{{index + 1}}:&nbsp;&nbsp;{{e.libelle}}</a>
+                        </h5>
+                      </div>
+                      <div id="collapse" [ngbCollapse]="e.iscollapsed" class="collapse"
+                           data-parent="#accordionsimplefill">
+                        <div class="card-body">
+                          <div *ngFor="let p of list;let index1=index">
+                            {{p.ennonce}}
+
+                          </div>
+
+                        </div>
+                      </div>
+                      <!-- <button class="btn btn-link" (click)="e.iscollapsed = !e.iscollapsed"
+                      [attr.aria-expanded]="!e.iscollapsed"
+                       aria-controls="collapseExample">
+                        <i class="fa" aria-hidden="true"></i>
+                        Details
+                    </button>
+                    <div id="collapse" [ngbCollapse]="e.iscollapsed">
+                        {{ e._id}}
+                    </div> -->
+                    </div>
+
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--faq-contant-end-->
+  </div>
+  <!-- end container-fluid -->
+</div>
+
+<ng-template #ajoutquestion>
+  <br>
+  <br>
+  <br>
+  <div class="modal-body text-center">
+
+
+    <div class="row">
+      <div class="col-12">
+        <form name="form" *ngIf="!affiche"
+              #f="ngForm">
+          <p>AJOUT question</p>
+          <div class="input-group mb-3">
+            <input  class="form-control" [(ngModel)]="libelle" [ngModelOptions]="{standalone: true}" name="libelle">
+
+
+          </div>
+          <!-- <div class="input-group mb-3">
+
+              <select class="custom-select" id="inputGroupSelect02" >
+
+
+                  <option  value={{q.libelle}} *ngFor="let q of listquetionbase |question:libelle"
+                   [(ngModel)]="libelle" [ngModelOptions]="{standalone: true}"
+
+
+                    >
+
+                    {{q.libelle}}</option>
+
+              </select>
+              <div class="input-group-append">
+                  <label class="input-group-text" for="inputGroupSelect02">Options</label>
+              </div>
+          </div> -->
+          <button  class="btn btn-info" type="submit" (click)="ajoutqq();affichajoutprposition()"
+          > ajouter
+          </button>
+        </form>
+        <form *ngIf="affiche" name="form" #f="ngForm">
+          <p>AJOUT prposition</p>
+          <div class="input-group mb-3">
+
+            <input  class="form-control" [(ngModel)]="enonce" [ngModelOptions]="{standalone: true}" name="libelle">
+
+          </div>
+
+          <!--                          <button type="submit" (click)="p"> ok1</button>
+           -->                         </form>
+
+
+      </div>
+
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,132 @@
+<div class="app-main" id="main">
+  <!-- begin container-fluid -->
+  <div class="container-fluid">
+    <!-- begin row -->
+    <div class="row">
+      <div class="col-md-12 m-b-30">
+        <!-- begin page title -->
+        <div class="d-block d-sm-flex flex-nowrap align-items-center">
+          <div class="page-title mb-2 mb-sm-0">
+            <h1>Offres Publiées</h1>
+          </div>
+          <div class="ml-auto d-flex align-items-center">
+            <nav>
+              <ol class="breadcrumb p-0 m-b-0">
+                <li class="breadcrumb-item">
+                  <a href="index.html"><i class="ti ti-home"></i></a>
+                </li>
+                <li class="breadcrumb-item">
+                  Gerer Offres
+                </li>
+                <li class="breadcrumb-item active text-primary" aria-current="page">Offres Publieés</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <!-- end page title -->
+      </div>
+    </div>
+    <!-- end row -->
+
+    <!--start widget social contant-->
+    <div class="row widget-social">
+
+
+
+
+
+
+
+      <div  *ngFor="let c of listeoffre" class="col-xl-4 col-md-6">
+        <div class="card card-statistics widget-social-box7">
+          <div class="card-body widget-social-contant">
+
+            <div  class="text-center widget-social-contant pt-4">
+
+              <app-entrepriseoffer [identreprise]="c.entreprise"></app-entrepriseoffer>
+              <div class="p-3">
+
+                <!-- Nom Entreprise -->
+
+
+                <!-- Titre de l'offre -->
+                <p class="mb-0"><a href="javascript:void(0)">{{c.titreposte}}</a></p>
+
+                <!-- Description de l'offre -->
+                <p class="mt-2">{{c.description}}</p>
+              </div>
+            </div>
+            <ul class="nav justify-content-center pb-2">
+
+              <li class="nav-item">
+                <a  href="javascript:void(0);" class="btn btn-icon btn-danger btn-round"
+                          (click)="recuper(c.entreprise,c.titreposte, c.description,c.typecontrat,
+                c.experienceexige,c.niveauetudeexige,c.datedebutpublication,c.datefinpublication);deleteoffre(c._id)"><i class="ti ti-close"></i>
+
+
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="javascript:void(0)" class="btn btn-icon btn-round btn-success"
+                (click)="recuper(c.entreprise,c.titreposte, c.description,c.typecontrat,
+                c.experienceexige,c.niveauetudeexige,c.datedebutpublication,c.datefinpublication)" data-toggle="modal" data-target="#verticalCenter">
+                  <i class="ti ti-eye"></i>
+                </a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+    </div>
+    <!--ebd widget social contant-->
+  </div>
+  <!-- end container-fluid -->
+</div>
+
+<div class="modal fade" id="verticalCenter" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="verticalCenterTitle">Détails Offres</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="wrapper">
+
+
+          <div class="offer" >
+
+            <p > Type Contrat:</p> {{offre.typecontrat}}
+            <p > DateDébutPublication: {{offre.datedebutpublication}}</p>
+            <p > ExpérienceExigé: {{offre.experienceexige}} </p>
+            <p>DateFinPublication: {{offre.datefinpublication}}</p>
+            <p >NiveauEtudeExigé: {{offre.niveauetudeexige}}</p>
+
+          </div>
+
+
+        </div>
+
+        <div class="concept">
+          <a href="https://dribbble.com/shots/4346772-Profile-Card" target="_blank">
+
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+

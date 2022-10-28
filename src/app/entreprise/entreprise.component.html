@@ -1,0 +1,153 @@
+<div class="app-main" id="main">
+  <!-- begin container-fluid -->
+  <div class="container-fluid">
+    <!-- begin row -->
+    <div class="row">
+      <div class="col-md-12 m-b-30">
+        <!-- begin page title -->
+        <div class="d-block d-sm-flex flex-nowrap align-items-center">
+          <div class="page-title mb-2 mb-sm-0">
+            <h1>Entreprise</h1>
+          </div>
+          <div class="ml-auto d-flex align-items-center">
+            <nav>
+              <ol class="breadcrumb p-0 m-b-0">
+                <li class="breadcrumb-item">
+                  <a href="index.html"><i class="ti ti-home"></i></a>
+                </li>
+                <li class="breadcrumb-item">
+                  Pages
+                </li>
+                <li class="breadcrumb-item active text-primary" aria-current="page">Entreprise</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <!-- end page title -->
+      </div>
+    </div>
+    <!-- end row -->
+    <!-- start-clients contant-->
+    <div class="row">
+      <div class="search-wrapper" style="margin-left: 80%">
+
+        <div class="search-content">
+          <form>
+            <div class="form-group">
+
+              <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="searchText"
+                     class="form-control autocomplete" placeholder="Search Here" id="autocomplete-ajax"
+                     autofocus="autofocus">
+
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="card card-statistics clients-contant">
+          <div class="card-header">
+            <div class="d-xxs-flex justify-content-between align-items-center">
+              <div class="card-heading">
+                <h4 class="card-title">Entreprise</h4>
+              </div>
+              <div class="mt-xxs-0 mt-3 btn-group btn-group-toggle" data-toggle="buttons">
+
+
+              </div>
+            </div>
+          </div>
+          <div class="card-body py-0 table-responsive">
+            <table class="table clients-contant-table mb-0">
+              <thead>
+              <tr>
+                <th scope="col">Entreprises</th>
+                <th scope="col">Matriculefiscale</th>
+                <th scope="col">Numtel</th>
+                <th scope="col">Approuver</th>
+                <th scope="col">Profil</th>
+                <th scope="col">Delete</th>
+              </tr>
+              </thead>
+
+              <!-- Begin Body-->
+              <tbody>
+
+              <tr *ngFor="let c of listeentreprise | entreprise: searchText | paginate:
+                             { itemsPerPage: 4, currentPage: p }">
+
+                <!-- LogoEntreprise -->
+                <td><img src="http://localhost:7000/entreprise/getsfile/{{c.avatar}}" class="img-rounded"
+                         alt="Clients-01" width="60px" height="50px"> {{c.username}}
+                </td>
+
+                <td>{{c.matriculefiscale}}</td>
+                <td>{{c.numtel}}</td>
+
+                <td><span *ngIf="!c.valide" class="btn btn-round btn-outline-danger"
+                          (click)="recuper(c.NomEntreprise, c.email,c.avatar,c.description,c.codepostale, c.anneefondation, c.secteuractivite ,c.localisation);valider(c._id)"> Approuver</span>
+                  <span *ngIf="c.valide" class="btn btn-round btn-outline-success">déja approuver</span>
+
+                </td>
+
+
+                <td>
+                  <button class="btn btn-round btn-outline-info" (click)="recuper(c.NomEntreprise,c.email ,c.avatar ,c.description,c.codepostale, c.anneefondation, c.secteuractivite ,c.localisation)" data-toggle="modal" data-target="#verticalCenter">consulter profil
+                  </button>
+                </td>
+
+                <td><a href="javascript:void(0);" class="btn btn-icon btn-outline-danger btn-round"
+                       (click)="deleteentreprise(c._id)"><i class="ti ti-close"></i></a>
+
+                </td>
+
+            </table>
+          </div>
+          <br>
+          <pagination-controls style="margin-left: 30%" (pageChange)="p = $event"></pagination-controls>
+
+        </div>
+      </div>
+    </div>
+    <!-- end-clients contant-->
+  </div>
+  <!-- end container-fluid -->
+</div>
+<div class="modal fade" id="verticalCenter" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="verticalCenterTitle">Profil entreprise</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="wrapper">
+
+
+          <div >
+            <img  style="margin-left: 30%;" src="http://localhost:7000/entreprise/getsfile/{{entreprise.avatar}}" width="150px" height="150px" class="img-rounded">
+
+            <p >{{entreprise.NomEntreprise}}</p>
+            <p  >     <i class="fa fa-google-plus"></i>{{entreprise.email}}</p>
+            <p >{{entreprise.description}}</p>
+            <p >{{entreprise.codepostale}} </p>
+            <p>{{entreprise.localisation}}</p>
+            <p >{{entreprise.secteuractivite}}</p>
+            <p >{{entreprise.anneefondation}}</p>
+          </div>
+
+
+        </div>
+
+        <div class="concept">
+          <a href="https://dribbble.com/shots/4346772-Profile-Card" target="_blank">
+
+          </a>
+        </div>
+
+    </div>
+  </div>
+</div>

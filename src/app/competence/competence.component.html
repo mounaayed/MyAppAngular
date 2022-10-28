@@ -1,0 +1,79 @@
+<div class="app-main" id="main">
+  <!-- begin container-fluid -->
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card card-statistics">
+          <a href="javascript:void(0);" style=" margin-top: 20px;width: 200px;margin-left: 800px"
+             (click)="openModal(ajoutcompetence)"
+             class="btn btn-primary">ajouter competence</a>
+
+          <div class="card-header">
+            <div class="card-heading">
+              <h4 class="card-title">List competence</h4>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-primary mb-0">
+                <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nom competence</th>
+                  <th scope="col">Supprimer</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let d of listecompetence;let i=index">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{d.nomcompetence}}</td>
+                  <td>
+                    <a (click)="deletecompetence(d._id)" href="javascript:void(0);"
+                       class="btn btn-icon btn-outline-danger btn-round"
+                    >
+                      <i class="ti ti-trash"></i></a>
+                  </td>
+
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<ng-template #ajoutcompetence>
+  <div class="modal-body text-center">
+    <p>AJOUT competence</p>
+    <form [formGroup]="formcompetence" class="mt-3 mt-sm-5">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label class="control-label">Nom competence</label>
+            <input type="text" class="form-control" formControlName="nomcompetence"
+                   [ngClass]="{ 'is-invalid': submitted && g.nomcompetence.errors }"/>
+            <div *ngIf="submitted && g.nomcompetence.errors" class="invalid-feedback">
+              <div *ngIf="g.nomcompetence.errors.required">nomcompetence is required</div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-12 mt-3">
+          <button type="button" class="btn btn-default" (click)="addc()">oui</button>
+
+          <button type="button" class="btn btn-primary" (click)="modalRef.hide()">No</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</ng-template>

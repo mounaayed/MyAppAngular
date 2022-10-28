@@ -1,0 +1,235 @@
+<div class="app-main" id="main">
+  <!-- begin container-fluid -->
+  <div class="container-fluid">
+
+    <div class="row">
+
+      <div class="col-lg-4">
+        <div class="card card-statistics">
+
+
+          <div class="card-header">
+            <button
+              (click)="openModal(ajoutdomaine)"
+              class="btn btn-outline-info" style="color: #0a8dd3">ajouter domaine
+            </button>
+            <div class="card-heading">
+              <h4 class="card-title">List Domaine</h4>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-primary mb-0">
+                <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nom Domain</th>
+                  <th scope="col">Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let d of listedomaine;let i=index">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{d.nomdomaine}}</td>
+                  <td>
+                    <a (click)="deletedomaine(d._id)" href="javascript:void(0);"
+                       class="btn btn-icon btn-outline-danger btn-round"
+                    >
+                      <i class="ti ti-trash"></i></a>
+                    <a (click)="recuper(d._id, d.nomdomaine,d.specialite)"
+                       href="javascript:void(0);"
+                       class="btn btn-icon btn-outline-success btn-round"
+                    ><i class="ti ti-eye"></i></a></td>
+
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div *ngIf="getsepecialite" class="card card-statistics">
+
+
+          <div class="card-header">
+            <button
+               (click)="openModal(ajoutspecialite)"
+               class="btn btn-outline-info" style="color: #0a8dd3">ajouter specilate
+            </button>
+            <div class="card-heading">
+              <h4 class="card-title">List specialite</h4>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <div *ngIf="!domaine?.specialite?.length" class="alert alert-inverse-light"
+                   role="alert">
+                list specialite vide
+              </div>
+              <table *ngIf="domaine?.specialite?.length" class="table table-primary mb-0">
+                <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nom specialite</th>
+                  <th scope="col">Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let s of domaine?.specialite;let i=index">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{s.nomspecialite}}</td>
+                  <td><a (click)="deletespecialite(s._id)" href="javascript:void(0);"
+                         class="btn btn-icon btn-outline-danger btn-round"
+                  ><i class="ti ti-trash"></i></a><a href="javascript:void(0);"
+                                                     (click)="rcuperspecialite(s._id, s.nomspecialite,s.competence)"
+                                                     class="btn btn-icon btn-outline-success btn-round"
+                  ><i class="ti ti-eye"></i></a></td>
+
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-lg-4">
+        <div *ngIf="getcomptence" class="card card-statistics">
+
+          <div class="card-header">
+            <button
+              (click)="openModal(ajoutcompetence)"
+              class="btn btn-outline-info" style="color: #0a8dd3">ajouter competence
+            </button>
+            <div class="card-heading">
+              <h4 class="card-title">List comptence</h4>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <div *ngIf="!specilite1.competence.length" class="alert alert-inverse-light"
+                   role="alert">
+                list comptence vide
+              </div>
+              <table *ngIf="specilite1.competence.length" class="table table-primary mb-0">
+                <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nom competence</th>
+                  <th scope="col">Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let c of specilite1.competence;let i=index">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{c.nomcompetence}}</td>
+                  <td><a (click)="deletecompetence(c._id)" href="javascript:void(0);"
+                         class="btn btn-icon btn-outline-danger btn-round"
+                  ><i class="ti ti-trash"></i></a>
+                  </td>
+
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+<ng-template #ajoutdomaine>
+  <div class="modal-body text-center">
+    <p>AJOUT domaine</p>
+    <form [formGroup]="formdomaine" class="mt-3 mt-sm-5">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label class="control-label">Nom domaine</label>
+            <input type="text" class="form-control" formControlName="nomdomaine"
+                   [ngClass]="{ 'is-invalid': submitted && f.nomdomaine.errors }"/>
+            <div *ngIf="submitted && f.nomdomaine.errors" class="invalid-feedback">
+              <div *ngIf="f.nomdomaine.errors.required">nomdomaine is required</div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-12 mt-3">
+          <button type="button" class="btn btn-default" (click)="add()">oui</button>
+
+          <button type="button" class="btn btn-primary" (click)="modalRef.hide()">No</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</ng-template>
+<ng-template #ajoutspecialite>
+  <div class="modal-body text-center">
+    <p>AJOUT specialite</p>
+    <form [formGroup]="formspecialite" (ngSubmit)="addspecialite()" class="mt-3 mt-sm-5">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label class="control-label">Nom specialite</label>
+            <select formControlName="specialite" class="form-control">
+              <option value={{spe._id}} *ngFor="let spe of listespecialite">{{spe.nomspecialite}}</option>
+            </select>
+            <div *ngIf="submitted && g.specialite.errors" class="invalid-feedback">
+              <div *ngIf="g.specialite.errors.required">specialite is required</div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-12 mt-3">
+          <button type="submit" class="btn btn-default" href="javascript:window.location.reload()">ajouter</button>
+
+          <button type="button" class="btn btn-primary" (click)="modalRef.hide()">annuler</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</ng-template>
+<ng-template #ajoutcompetence>
+  <div class="modal-body text-center">
+    <p>AJOUT competence</p>
+    <form [formGroup]="formcompetence" (ngSubmit)="addcomp()" class="mt-3 mt-sm-5">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label class="control-label">Nom competence</label>
+            <select formControlName="competence" class="form-control">
+              <option value={{com._id}} *ngFor="let com of listecompetence">{{com.nomcompetence}}</option>
+            </select>
+            <div *ngIf="submitted && h.competence.errors" class="invalid-feedback">
+              <div *ngIf="h.competence.errors.required">competence is required</div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-12 mt-3">
+          <button type="submit" class="btn btn-default" href="javascript:window.location.reload()">ajouter</button>
+
+          <button type="button" class="btn btn-primary" (click)="modalRef.hide()">annuler</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</ng-template>

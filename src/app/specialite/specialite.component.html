@@ -1,0 +1,79 @@
+<div class="app-main" id="main">
+  <!-- begin container-fluid -->
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card card-statistics">
+          <a href="javascript:void(0);" style=" margin-top: 20px;width: 200px;margin-left: 800px"
+             (click)="openModal(ajoutspecialite)"
+             class="btn btn-primary">ajouter specialite</a>
+
+          <div class="card-header">
+            <div class="card-heading">
+              <h4 class="card-title">List specialite</h4>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-primary mb-0">
+                <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nom specialite</th>
+                  <th scope="col">Supprimer</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let d of listespecialite;let i=index">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{d.nomspecialite}}</td>
+                  <td>
+                    <a (click)="deletespecilite(d._id)" href="javascript:void(0);"
+                       class="btn btn-icon btn-outline-danger btn-round"
+                    >
+                      <i class="ti ti-trash"></i></a>
+                  </td>
+
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<ng-template #ajoutspecialite>
+  <div class="modal-body text-center">
+    <p>AJOUT specialite</p>
+    <form [formGroup]="formspecialite" class="mt-3 mt-sm-5">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label class="control-label">Nom specialite</label>
+            <input type="text" class="form-control" formControlName="nomspecialite"
+                   [ngClass]="{ 'is-invalid': submitted && g.nomspecialite.errors }"/>
+            <div *ngIf="submitted && g.nomspecialite.errors" class="invalid-feedback">
+              <div *ngIf="g.nomspecialite.errors.required">nomspecialite is required</div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-12 mt-3">
+          <button type="button" class="btn btn-default" (click)="adds()">oui</button>
+
+          <button type="button" class="btn btn-primary" (click)="modalRef.hide()">No</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</ng-template>
